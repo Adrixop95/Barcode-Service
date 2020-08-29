@@ -1,0 +1,8 @@
+[flake8]
+count = True
+max-line-length = 130
+exclude =
+    tests
+    .git
+    __init__.py
+    venv

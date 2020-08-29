@@ -1,0 +1,19 @@
+on: [push]
+
+name: Build and publish development image
+
+jobs:
+  build-and-publish-development:
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/development'
+
+      steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Publish latest Docker image
+        uses: VaultVulp/gp-docker-action@1.1.6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: barcodegenerator
+          dockerfile: Dockerfile
+          image-tag: development
