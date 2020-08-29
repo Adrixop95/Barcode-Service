@@ -27,7 +27,7 @@ in the application's root directory.
 Run the container from the available registry.
 
 ```
-docker run -p 8000:8000 
+docker run -p 8000:8000 docker.pkg.github.com/adrixop95/barcodegenerator/barcodegenerator:latest
 ```
 
 If you want, you can maintain the consistency of the generated codes by mounting the following folders:
