@@ -1,6 +1,11 @@
 # BarcodeGenerator
 Simple and small python service designed to generate Barcode, QRCode, Aztec Code.
 
+## Demo
+	
+> https://barcode.adrox.xyz  
+> https://barcode.adrox.xyz/docs
+
 ## Requirements and dependencies
 The website was written using Python 3.8 and FastAPI.  
 The dependencies are listed in the `requirements.txt` file.  
@@ -36,6 +41,21 @@ If you want, you can maintain the consistency of the generated codes by mounting
 - /app/qrcode
 
 The service does not have any environment variables.
+
+### docker-compose example
+To run the application on localhost from docker-compose, execute the command:
+
+Windows:
+```
+$env:URL="localhost"; docker-compose -f docker-compose.yml up
+```
+
+Linux, macOS:
+```
+URL="localhost" docker-compose -f .\docker-compose.yml up
+```
+
+After launch, it will be available at https://localhost
 ## Requests
 Swagger is available at `/docs` path.
 

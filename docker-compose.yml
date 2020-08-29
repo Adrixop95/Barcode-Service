@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+
+    barcode_generator_traefik:
+        image: "traefik:v2.2"
+        container_name: "barcode_generator_traefik"
+        command:
+            - "--providers.docker=true"
+            - "--providers.docker.exposedbydefault=true"
+            - "--entrypoints.web.address=:80"
+            - "--entrypoints.web-secure.address=:443"
+            - "--entrypoints.web.forwardedheaders.insecure"
+            - "--entrypoints.web.proxyprotocol.insecure"
+            - "--certificatesresolvers.letsencrypt.acme.email=adrixop95@gmail.com"
+            - "--certificatesresolvers.letsencrypt.acme.storage=/ssl/acme.json"
+            - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+        labels:
+            - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+            - "traefik.http.routers.http-catchall.entrypoints=web"
+            - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+            - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+            - "traefik_le:/ssl"
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - gitlab_helper_network
+        restart: unless-stopped
+
+    barcode_generator:
+        image: "docker.pkg.github.com/adrixop95/barcodegenerator/barcodegenerator:latest"
+        container_name: "barcode_generator"
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.barcode_generator.rule=Host(`${URL}`)
+            - traefik.http.services.barcode_generator.loadbalancer.server.port=8000
+            - traefik.http.routers.barcode_generator.entrypoints=web-secure
+            - traefik.http.middlewares.barcode_generator.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
+            - traefik.http.middlewares.barcode_generator.headers.accesscontrolalloworigin=origin-list-or-null
+            - traefik.http.middlewares.barcode_generator.headers.accesscontrolmaxage=100
+            - traefik.http.middlewares.barcode_generator.headers.addvaryheader=true
+            - traefik.http.routers.barcode_generator.tls=true
+            - traefik.http.routers.barcode_generator.tls.certresolver=letsencrypt
+        networks:
+            - gitlab_helper_network
+        restart: unless-stopped
+
+volumes: 
+    traefik_le:
+
+networks:
+    gitlab_helper_network:
+        name: barcode_generator_network
