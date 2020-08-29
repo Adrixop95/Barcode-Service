@@ -64,25 +64,25 @@ Swagger is available at `/docs` path.
 Request type: __post__  
 Request path: __/barcode__  
 Data:      
->barcode_type: str  
->barcode_message: str
+>barcode_type: str  [values: EAN8,EAN13,EAN14,UPCA,JAN,ISBN10,ISBN13,ISSN,Code39,Code128,PZN]  
+>barcode_message: str [Just a message]
 
 <br/><br/>
 
 Request type: __post__  
 Request path: __/qrcode__   
 Data:  
->qrcode_scale: int  
->qrcode_message: str  
->qrcode_error_correct: Optional[str] = None
+>qrcode_scale: int [Image scale betwen 1 to int constraint]  
+>qrcode_message: str  [Just a message]  
+>qrcode_error_correct: Optional[str] = None [L (7% compression), M (15% compression), Q (25% compression), H (30% compression) or just remove this parameter from request]  
 
 <br/><br/>
 
 Request type: __post__  
 Request path: __/aztec__  
 Data:  
->aztec_code_scale: int  
->aztec_code_message: str 
+>aztec_code_scale: int  [Image scale betwen 1 to int constraint]  
+>aztec_code_message: str [Just a message]  
 
 ## License
 The application is available under the GNU GENERAL PUBLIC LICENSE.
