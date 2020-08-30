@@ -30,7 +30,7 @@ services:
         restart: unless-stopped
 
     barcode_generator:
-        image: "docker.pkg.github.com/adrixop95/barcodegenerator/barcodegenerator:latest"
+        image: "adrixop95/barcodegenerator:latest"
         container_name: "barcode_generator"
         labels:
             - traefik.enable=true

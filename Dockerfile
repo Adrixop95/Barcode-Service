@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.8-slim
 
 WORKDIR /app
 EXPOSE 8000
@@ -6,7 +6,11 @@ EXPOSE 8000
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apk add --no-cache build-base zlib-dev jpeg-dev g++ freetype-dev
+
+RUN apt-get update && \
+    apt-get install libdmtx-dev -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 

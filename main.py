@@ -6,6 +6,8 @@ from aztec_code_generator import AztecCode
 from barcode.writer import ImageWriter
 from pydantic import BaseModel
 from starlette.responses import FileResponse
+from pylibdmtx.pylibdmtx import encode
+from PIL import Image
 from typing import Optional
 
 from fastapi import FastAPI
@@ -27,12 +29,16 @@ class Aztec(BaseModel):
     aztec_code_message: str
 
 
+class DataMatrix(BaseModel):
+    data_matrix_message: str
+
+
 app = FastAPI()
 
 
 @app.on_event("startup")
 async def create_folder_structure():
-    folders = ['./barcode', './qrcode', './aztec']
+    folders = ['./barcode', './qrcode', './aztec', './datamatrix']
     try:
         for folder in folders:
             os.mkdir(os.path.join(folder))
@@ -79,4 +85,14 @@ async def aztec_code_image(aztec_gen: Aztec):
 
     aztec_code = AztecCode(message_filename)
     aztec_code.save(message_filename, aztec_gen.aztec_code_scale)
+    return FileResponse(message_filename)
+
+
+@app.post("/datamatrix")
+async def data_matrix_image(data_gen: DataMatrix):
+    message_filename = "./datamatrix/" + data_gen.data_matrix_message.replace('/', '') + ".png"
+
+    encoded = encode(data_gen.data_matrix_message.encode('utf8'))
+    img = Image.frombytes('RGB', (encoded.width, encoded.height), encoded.pixels)
+    img.save(message_filename)
     return FileResponse(message_filename)
