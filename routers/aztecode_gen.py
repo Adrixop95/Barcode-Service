@@ -18,4 +18,3 @@ async def aztec_code_image(aztec_gen: Aztec):
     aztec_code = AztecCode(message_filename)
     aztec_code.save(message_filename, aztec_gen.aztec_code_scale)
     return FileResponse(message_filename)
-
