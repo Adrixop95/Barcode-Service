@@ -1,5 +1,5 @@
-# BarcodeGenerator
-Simple and small python service designed to generate Barcode, QRCode, Aztec Code, DataMatrix.
+# Barcode Service
+Simple and small python service designed to generate and read Barcode, QRCode, Aztec Code, DataMatrix.
 
 ## Demo
 	
@@ -62,35 +62,44 @@ After launch, it will be available at https://localhost
 Swagger is available at `/docs` path.
 
 ### List of available requests:
+
+#### barcode
 Request type: __post__  
-Request path: __/barcode__  
+Request path: __/barcode/generate__  
 Data:      
 >barcode_type: str  [values: EAN8,EAN13,EAN14,UPCA,JAN,ISBN10,ISBN13,ISSN,Code39,Code128,PZN]  
 >barcode_message: str [Just a message]
 
-<br/><br/>
-
+#### qrcode
 Request type: __post__  
-Request path: __/qrcode__   
+Request path: __/qrcode/generate__   
 Data:  
 >qrcode_scale: int [Image scale between 1 to int constraint]  
 >qrcode_message: str  [Just a message]  
 >qrcode_error_correct: Optional[str] = None [L (7% compression), M (15% compression), Q (25% compression), H (30% compression) or just remove this parameter from request]  
 
-<br/><br/>
-
 Request type: __post__  
-Request path: __/aztec__  
+Request path: __/qrcode/decrypt__  
+Data:      
+>file: string($binary) [Just a file]  
+
+#### aztec
+Request type: __post__  
+Request path: __/aztec/generate__  
 Data:  
 >aztec_code_scale: int  [Image scale between 1 to int constraint]  
 >aztec_code_message: str [Just a message]  
 
-<br/><br/>
-
+#### datamatrix
 Request type: __post__  
-Request path: __/datamatrix__  
+Request path: __/datamatrix/generate__  
 Data:  
 >data_matrix_message: str [Just a message] 
+
+Request type: __post__  
+Request path: __/datamatrix/decrypt__  
+Data:      
+>file: string($binary) [Just a file]  
 
 ## License
 The application is available under the GNU GENERAL PUBLIC LICENSE.
