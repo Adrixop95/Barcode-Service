@@ -30,17 +30,23 @@ services:
         restart: unless-stopped
 
     barcode_generator:
-        image: "adrixop95/barcodegenerator:latest"
+        #image: "adrixop95/barcodegenerator:latest"
+        build:
+            dockerfile: Dockerfile
+            context: .
         container_name: "barcode_generator"
         labels:
             - traefik.enable=true
-            - traefik.http.routers.barcode_generator.rule=Host(`${URL}`)
+            - traefik.http.routers.barcode_generator.rule=Host(`${URL}`) && PathPrefix(`/api/v1`)
             - traefik.http.services.barcode_generator.loadbalancer.server.port=8000
             - traefik.http.routers.barcode_generator.entrypoints=web-secure
             - traefik.http.middlewares.barcode_generator.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE,PATCH
             - traefik.http.middlewares.barcode_generator.headers.accesscontrolalloworigin=origin-list-or-null
             - traefik.http.middlewares.barcode_generator.headers.accesscontrolmaxage=100
             - traefik.http.middlewares.barcode_generator.headers.addvaryheader=true
+            - traefik.http.routers.barcode_generator.middlewares=barcode_generator-stripprefix
+            - traefik.http.middlewares.barcode_generator-stripprefix.stripprefix.prefixes=/api/v1
+            - traefik.http.middlewares.barcode_generator-stripprefix.stripprefix.forceslash=false
             - traefik.http.routers.barcode_generator.tls=true
             - traefik.http.routers.barcode_generator.tls.certresolver=letsencrypt
         networks:
