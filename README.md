@@ -56,7 +56,7 @@ Linux, macOS:
 URL="localhost" docker-compose -f .\docker-compose.yml up
 ```
 
-After launch, it will be available at https://localhost
+After launch, it will be available at https://localhost/api/v1/
 
 ## Requests
 Swagger is available at `/docs` path.
