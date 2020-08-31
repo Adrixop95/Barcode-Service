@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from starlette.responses import FileResponse
 from pylibdmtx.pylibdmtx import encode, decode
 from PIL import Image
@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 class DataMatrix(BaseModel):
-    data_matrix_message: str
+    data_matrix_message: str = Field(..., title="Data matrix message")
 
 
 @router.post("/generate")

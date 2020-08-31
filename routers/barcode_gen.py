@@ -1,7 +1,7 @@
 import barcode
 
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from starlette.responses import FileResponse
 from barcode.writer import ImageWriter
 
@@ -9,8 +9,8 @@ router = APIRouter()
 
 
 class Barcode(BaseModel):
-    barcode_type: str
-    barcode_message: str
+    barcode_type: str = Field(..., title="Barcode type")
+    barcode_message: str = Field(..., title="Barcode message")
 
 
 @router.post("/generate")
