@@ -44,7 +44,7 @@ If you want, you can maintain the consistency of the generated codes by mounting
 The service does not have any environment variables.
 
 ### docker-compose example
-To run the application on localhost from docker-compose, execute the command:
+To run the application on localhost from docker-compose, go to the `deployment/docker-compose` folder and execute the command:
 
 Windows:
 ```
@@ -56,8 +56,31 @@ Linux, macOS:
 URL="localhost" docker-compose -f .\docker-compose.yml up
 ```
 
+Traefik automatically manages the SSL certificate generating the let's encrypt certificate. The certificate is generated for `example@example.com`, please change if necessary.  
+
 After launch, it will be available at https://localhost/api/v1/
 
+### Kubernetes example
+Running the application using kubernetes requires having installed helm and installing a traefik with it.  
+Installation of the traefik can be performed using the following commands:
+```
+$ helm repo add traefik https://containous.github.io/traefik-helm-chart
+$ helm repo update
+$ helm install traefik traefik/traefik
+```
+
+Then go to the `deployment/kubernetes` folder and execute the following commands:
+```
+$ helm upgrade traefik traefik/traefik --values 000-values.yaml
+$ kubectl apply -f 001-deployment.yaml
+```
+
+Traefik automatically manages the SSL certificate generating the let's encrypt certificate. The certificate is generated for `example@example.com`, please change if necessary.  
+
+
+In order for the application to be launched on an address other than `localhost`, localhost addresses should be changed in the `001-deployment.yaml` file to the target address of your choice.
+
+Without changing the configuration and parameters, the application will be available at: `https://localhost`.
 ## Requests
 Swagger is available at `/docs` path.
 

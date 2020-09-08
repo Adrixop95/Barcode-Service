@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barcode-service
+  labels:
+    app: barcode-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barcode-service
+  template:
+    metadata:
+      labels:
+        app: barcode-service
+    spec:
+      containers:
+        - name: barcode-service
+          image: adrixop95/barcodegenerator:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: barcode-service-service
+spec:
+  selector:
+    app: barcode-service
+  ports:
+    - protocol: TCP
+      port: 8000
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: barcode-service-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`localhost`) && PathPrefix(`/api/v1`)
+      services:
+        - name: barcode-service-service
+          port: 8000
+      middlewares:
+        - name: barcode-service-stripprefix
+  tls:
+    certResolver: le
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: barcode-service-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+      - "/api/v1"

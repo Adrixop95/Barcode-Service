@@ -11,7 +11,7 @@ services:
             - "--entrypoints.web-secure.address=:443"
             - "--entrypoints.web.forwardedheaders.insecure"
             - "--entrypoints.web.proxyprotocol.insecure"
-            - "--certificatesresolvers.letsencrypt.acme.email=adrixop95@gmail.com"
+            - "--certificatesresolvers.letsencrypt.acme.email=example@example.com"
             - "--certificatesresolvers.letsencrypt.acme.storage=/ssl/acme.json"
             - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
         labels:

@@ -1,0 +1,9 @@
+additionalArguments:
+    - --certificatesresolvers.le.acme.email=example@example.com
+    - --certificatesresolvers.le.acme.storage=/data/acme.json
+    - --certificatesresolvers.le.acme.tlschallenge=true
+    - --entrypoints.web.http.redirections.entryPoint.to=:443
+    - --entrypoints.web.http.redirections.entryPoint.scheme=https
+persistence:
+    enabled: true
+    path: /data
