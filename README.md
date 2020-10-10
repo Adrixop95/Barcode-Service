@@ -8,16 +8,16 @@ Simple and small python service designed to generate and read Barcode, QRCode, A
 
 ## Requirements and dependencies
 The website was written using Python 3.8 and FastAPI.  
-The dependencies are listed in the `requirements.txt` file.  
+The dependencies are listed in the `pyproject.toml` file.  
 
 ## Installation
 By default, the application is served on port 8000.
 
 ### Local
-To run the application locally, install the dependencies from the `requirements.txt` 
+To run the application locally, install the dependencies using [poetry](https://python-poetry.org/) 
 
 ```
-pip install -r requirements.txt
+poetry install
 ```
 
 file and then execute the command 
