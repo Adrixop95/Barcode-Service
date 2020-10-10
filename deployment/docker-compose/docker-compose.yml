@@ -2,7 +2,7 @@ version: "3.8"
 services:
 
     barcode_generator_traefik:
-        image: "traefik:v2.2"
+        image: "traefik:v2.3"
         container_name: "barcode_generator_traefik"
         command:
             - "--providers.docker=true"
@@ -26,7 +26,7 @@ services:
             - "80:80"
             - "443:443"
         networks:
-            - gitlab_helper_network
+            - barcode-service
         restart: unless-stopped
 
     barcode_generator:
@@ -47,12 +47,12 @@ services:
             - traefik.http.routers.barcode_generator.tls=true
             - traefik.http.routers.barcode_generator.tls.certresolver=letsencrypt
         networks:
-            - gitlab_helper_network
+            - barcode-service
         restart: unless-stopped
 
 volumes: 
     traefik_le:
 
 networks:
-    gitlab_helper_network:
-        name: barcode_generator_network
+    barcode-service:
+        name: barcode-service
