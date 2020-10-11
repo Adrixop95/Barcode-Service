@@ -38,8 +38,10 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY . /app/
 WORKDIR /app
 
+RUN mkdir -p /usr/share/man/man1
+
 RUN apt-get update && \
-    apt-get install libdmtx-dev zbar-tools -y && \
+    apt-get install libdmtx-dev zbar-tools default-jre-headless -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
     

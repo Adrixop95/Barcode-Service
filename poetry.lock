@@ -202,10 +202,18 @@ category = "main"
 optional = false
 python-versions = ">=3.6.1"
 
+[[package]]
+name = "zxing"
+version = "0.11"
+description = "wrapper for zebra crossing (zxing) barcode library"
+category = "main"
+optional = false
+python-versions = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "40de53eb3c952db1264b4028882e00ca6d678fc5ef4839434cd19d21b7f9149c"
+content-hash = "b5cf206f022f6abbaf79fe6068b031cd7cd6460f6d08f954a0f7d11cfeba734e"
 
 [metadata.files]
 aiofiles = [
@@ -353,4 +361,7 @@ websockets = [
     {file = "websockets-8.1-cp38-cp38-win32.whl", hash = "sha256:e898a0863421650f0bebac8ba40840fc02258ef4714cb7e1fd76b6a6354bda36"},
     {file = "websockets-8.1-cp38-cp38-win_amd64.whl", hash = "sha256:f8a7bff6e8664afc4e6c28b983845c5bc14965030e3fb98789734d416af77c4b"},
     {file = "websockets-8.1.tar.gz", hash = "sha256:5c65d2da8c6bce0fca2528f69f44b2f977e06954c8512a952222cea50dad430f"},
+]
+zxing = [
+    {file = "zxing-0.11.tar.gz", hash = "sha256:486ccda23894debda0a62cfc0c1cfa988cd245c47eab9ca792b951901115bbf6"},
 ]

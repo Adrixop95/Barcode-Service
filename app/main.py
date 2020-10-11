@@ -5,7 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.api.api_router import api_router
 
-app = FastAPI(root_path="/api/v1", version="0.1.4")
+app = FastAPI(root_path="/api/v1", version="0.1.5")
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,7 +19,7 @@ app.include_router(api_router)
 
 @app.on_event("startup")
 async def create_folder_structure():
-    folders = ['./barcode', './qrcode', './aztec', './datamatrix']
+    folders = ['./barcode', './qrcode', './aztec', './aztec/upload', './datamatrix']
     try:
         for folder in folders:
             os.mkdir(os.path.join(folder))
