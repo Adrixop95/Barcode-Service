@@ -5,7 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from routers import aztecode_gen, barcode_gen, datamatrix_gen, qrcode_gen
 
-app = FastAPI(version="0.1.3")
+app = FastAPI(root_path="/api/v1", version="0.1.4")
 
 app.add_middleware(
     CORSMiddleware,

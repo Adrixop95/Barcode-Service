@@ -26,6 +26,7 @@ async def barcode_image(barcode_gen: Barcode):
     filename = ean.save(message_filename)
     return FileResponse(filename)
 
+
 @router.post("/decrypt")
 async def barcode_decrypt(file: bytes = File(...)):
     stream = BytesIO(file)
