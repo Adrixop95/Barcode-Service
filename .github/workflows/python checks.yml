@@ -1,6 +1,6 @@
 on: [push]
 
-name: Python Flake8
+name: Python Code Checks
 
 jobs:
   build:
