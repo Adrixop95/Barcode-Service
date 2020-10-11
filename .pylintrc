@@ -1,6 +1,6 @@
 [MASTER]
 
-extension-pkg-whitelist=
+extension-pkg-whitelist=pydantic
 ignore=CVS,
        docker,
        migrations,
