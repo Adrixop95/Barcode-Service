@@ -25,7 +25,7 @@ async def aztec_code_image(aztec_gen: Aztec):
 
 
 @router.post("/decrypt")
-async def barcode_decrypt(file: UploadFile = File(...)):
+async def aztec_code_decrypt(file: UploadFile = File(...)):
 
     upload_folder = "./aztec/upload/"
     file_object = file.file
