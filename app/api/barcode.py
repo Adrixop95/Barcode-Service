@@ -1,21 +1,15 @@
 from io import BytesIO
 
-from fastapi import APIRouter, File
-from pydantic import BaseModel, Field
-from starlette.responses import FileResponse
-from pyzbar.pyzbar import decode
-from PIL import Image
-
-from barcode.writer import ImageWriter
 import barcode
+from PIL import Image
+from barcode.writer import ImageWriter
+from fastapi import APIRouter, File
+from pyzbar.pyzbar import decode
+from starlette.responses import FileResponse
 
+from app.schemes.barcode import Barcode
 
 router = APIRouter()
-
-
-class Barcode(BaseModel):
-    barcode_type: str = Field(..., title="Barcode type")
-    barcode_message: str = Field(..., title="Barcode message")
 
 
 @router.post("/generate")
