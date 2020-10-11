@@ -23,7 +23,7 @@ poetry install
 file and then execute the command 
 
 ```
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 in the application's root directory.
