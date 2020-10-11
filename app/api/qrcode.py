@@ -1,20 +1,14 @@
 from io import BytesIO
 
 import pyqrcode
-
-from fastapi import APIRouter, File
-from pydantic import BaseModel, Field
-from starlette.responses import FileResponse
-from pyzbar.pyzbar import decode
 from PIL import Image
+from fastapi import APIRouter, File
+from pyzbar.pyzbar import decode
+from starlette.responses import FileResponse
+
+from app.schemes.qrcode import QRCode
 
 router = APIRouter()
-
-
-class QRCode(BaseModel):
-    qrcode_scale: int = Field(..., title="QRCode scale")
-    qrcode_message: str = Field(..., title="QRCode message")
-    qrcode_error_correct: str = Field(None, title="QRCode error correct")
 
 
 @router.post("/generate")

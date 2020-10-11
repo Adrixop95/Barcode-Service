@@ -31,13 +31,13 @@ jobs:
       run: |
         POETRY_VENV=$(ls -td /home/runner/.cache/pypoetry/virtualenvs/*/ | head -1)
         source $POETRY_VENV/bin/activate
-        flake8 .
+        flake8 app/
 
     - name: PyLint
       run: |
         POETRY_VENV=$(ls -td /home/runner/.cache/pypoetry/virtualenvs/*/ | head -1)
         source $POETRY_VENV/bin/activate
-        pylint --rcfile ./.pylintrc routers/
+        pylint --rcfile ./.pylintrc app/
 
     - name: PipCheck
       run: |

@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from routers import aztecode_gen, barcode_gen, datamatrix_gen, qrcode_gen
+from app.api.api_router import api_router
 
 app = FastAPI(root_path="/api/v1", version="0.1.4")
 
@@ -14,25 +14,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
-    aztecode_gen.router,
-    prefix="/aztec"
-)
-
-app.include_router(
-    barcode_gen.router,
-    prefix="/barcode"
-)
-
-app.include_router(
-    datamatrix_gen.router,
-    prefix="/datamatrix"
-)
-
-app.include_router(
-    qrcode_gen.router,
-    prefix="/qrcode"
-)
+app.include_router(api_router)
 
 
 @app.on_event("startup")

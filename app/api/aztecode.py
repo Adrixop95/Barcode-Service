@@ -1,14 +1,10 @@
-from fastapi import APIRouter
-from pydantic import BaseModel, Field, PositiveInt
 from aztec_code_generator import AztecCode
+from fastapi import APIRouter
 from starlette.responses import FileResponse
 
+from app.schemes.aztecode import Aztec
+
 router = APIRouter()
-
-
-class Aztec(BaseModel):
-    aztec_code_scale: PositiveInt = Field(..., title="Aztec qrcode scale")
-    aztec_code_message: str = Field(..., title="Aztec qrcode message")
 
 
 @router.post("/generate")
