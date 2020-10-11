@@ -1,10 +1,11 @@
+from io import BytesIO
+
 import pyqrcode
 
 from fastapi import APIRouter, File
 from pydantic import BaseModel, Field
 from starlette.responses import FileResponse
 from pyzbar.pyzbar import decode
-from io import BytesIO
 from PIL import Image
 
 router = APIRouter()

@@ -1,9 +1,10 @@
+from io import BytesIO
+
 from fastapi import APIRouter, File
 from pydantic import BaseModel, Field
 from starlette.responses import FileResponse
 from pylibdmtx.pylibdmtx import encode, decode
 from PIL import Image
-from io import BytesIO
 
 router = APIRouter()
 

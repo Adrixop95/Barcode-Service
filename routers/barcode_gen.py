@@ -1,8 +1,8 @@
-import barcode
-
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from starlette.responses import FileResponse
+
+import barcode
 from barcode.writer import ImageWriter
 
 router = APIRouter()
