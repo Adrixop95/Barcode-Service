@@ -27,7 +27,6 @@ jobs:
         pip install poetry
         poetry install
         poetry add flake8
-        poetry add safety
         poetry add PyLint
         poetry show -v
         
