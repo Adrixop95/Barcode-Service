@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "barcode-service"
-version = "0.1.5"
+version = "0.1.6"
 description = "Simple and small python service designed to generate and read Barcode, QRCode, Aztec Code, DataMatrix."
 authors = ["adrixop95 <adrixop95@me.com>"]
 license = "GPL-3.0"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 uvicorn = "^0.12.1"
 aiofiles = "^0.5.0"
 aztec-code-generator = "^0.3"
